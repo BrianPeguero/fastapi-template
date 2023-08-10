@@ -7,7 +7,7 @@ from jose import jwt, JWTError
 
 from core.config import settings
 from core.auth import oauth2_scheme
-from models.user.user import User
+from models.security.user import User
 from db.session import SessionLocal
 
 

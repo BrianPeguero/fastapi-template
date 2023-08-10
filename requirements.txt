@@ -1,7 +1,9 @@
 fastapi[all]
 uvicorn[standard]
+gunicorn
 SQLAlchemy
 requests
+httpx
 python-dotenv
 alembic 
 psycopg2-binary

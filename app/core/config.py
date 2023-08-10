@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     PG_PORT: int
     PG_DB: str
     PG_NOTIFICATION_SCHEMA: str
-    PG_USER_SCHEMA: str
+    PG_SECURITY_SCHEMA: str
     PG_POKEMON_SCHEMA: str
     PG_DEBUG_FLAG: bool
     PG_AUTOFLUSH: bool

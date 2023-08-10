@@ -1,5 +1,5 @@
 from sqlalchemy.types import BIGINT, VARCHAR, Boolean, TEXT
-from sqlalchemy import Column
+from sqlalchemy import Column, BIGINT, VARCHAR, Text, Boolean
 from sqlalchemy.orm import relationship
 from core.config import settings
 
@@ -7,7 +7,7 @@ from models.base import Base
 
 class User(Base):
     __tablename__ = "user"
-    __table_args__ = {"schema": settings.PG_USER_SCHEMA}
+    __table_args__ = {"schema": settings.PG_SECURITY_SCHEMA}
     id = Column(BIGINT, primary_key=True, index=True)
     first_name = Column(VARCHAR(256), nullable=True)
     last_name = Column(VARCHAR(256), nullable=True)

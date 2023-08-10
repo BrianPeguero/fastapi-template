@@ -5,7 +5,7 @@ from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 from jose import jwt
 
-from models.user.user import User
+from models.security.user import User
 from core.config import settings
 from core.security import verify_password
 

@@ -17,7 +17,7 @@ logger = logging.getLogger()
 BASE_PATH = Path(__file__).resolve().parent
 TEMPLATES = Jinja2Templates(directory=str(BASE_PATH / "templates"))
 
-log_file = '/utils/app.log'
+log_file = 'app/utils/app.log'
 # logging.config.fileConfig('./app/utils/logging.ini', defaults={'logfilename': log_file}, disable_existing_loggers=False)
 
 logger.setLevel(settings.API_DEBUG_LEVEL)
@@ -58,6 +58,6 @@ if __name__ == "__main__":
                 ssl_certfile=settings.SSL_CERTFILE, 
                 ssl_keyfile=settings.SSL_KEYFILE,
                 log_level='info',
-                log_config='./utils/logging.ini',
+                log_config='./app/utils/logging.ini',
                 use_colors=True
                 )
