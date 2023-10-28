@@ -7,8 +7,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
 
-from api.v1.api import api_router
-from core.config import settings
+from app.api.v1.api import api_router
+from app.core.config import settings
 
 
 os.system('color')
@@ -24,7 +24,10 @@ logger.setLevel(settings.API_DEBUG_LEVEL)
 
 
 
-app = FastAPI(title="FastAPI Template")
+
+
+
+app = FastAPI(title=settings.APP_TITLE)
 
 
 app.add_middleware(
@@ -61,3 +64,5 @@ if __name__ == "__main__":
                 log_config='./app/utils/logging.ini',
                 use_colors=True
                 )
+    
+    

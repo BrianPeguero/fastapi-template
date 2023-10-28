@@ -5,10 +5,10 @@ from fastapi import Depends, HTTPException, status
 from pydantic import BaseModel
 from jose import jwt, JWTError
 
-from core.config import settings
-from core.auth import oauth2_scheme
-from models.security.user import User
-from db.session import SessionLocal
+from app.core.config import settings
+from app.core.auth import oauth2_scheme
+from app.models.security.user import User
+from app.db.session import SessionLocal
 
 
 

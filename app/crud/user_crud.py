@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 
-from models.security.user import User
-from schemas.user import UserCreate
-from core.security import get_password_hash
+from app.models.security.user import User
+from app.schemas.user import UserCreate
+from app.core.security import get_password_hash
 
 def get_user_by_email(*, email: str, db: Session) -> User | None:
     return db.query(User).filter(User.email == email).first()

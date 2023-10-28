@@ -1,9 +1,9 @@
 from sqlalchemy.types import BIGINT, VARCHAR, Boolean, TEXT
 from sqlalchemy import Column, BIGINT, VARCHAR, Text, Boolean
 from sqlalchemy.orm import relationship
-from core.config import settings
+from app.core.config import settings
 
-from models.base import Base
+from app.models.base import Base
 
 class User(Base):
     __tablename__ = "user"

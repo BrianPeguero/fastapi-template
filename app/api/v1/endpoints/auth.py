@@ -4,10 +4,10 @@ from typing import Any
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordRequestForm
 
-from api.deps import get_db, get_current_user
-from schemas.user import User, UserCreate
-from crud import user_crud
-from core.auth import (
+from app.api.deps import get_db, get_current_user
+from app.schemas.user import User, UserCreate
+from app.crud import user_crud
+from app.core.auth import (
     authenticate,
     create_access_token,
 )

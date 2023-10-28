@@ -5,9 +5,9 @@ from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 from jose import jwt
 
-from models.security.user import User
-from core.config import settings
-from core.security import verify_password
+from app.models.security.user import User
+from app.core.config import settings
+from app.core.security import verify_password
 
 
 JWTPayloadMapping = MutableMapping[
