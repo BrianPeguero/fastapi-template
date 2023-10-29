@@ -22,13 +22,14 @@ class Settings(BaseSettings):
     API_DEBUG_LEVEL: str
     API_CORS_ORIGINS: list
 
-    SSL_CERTFILE:str
-    SSL_KEYFILE:str
+    SSL_CERTFILE: str
+    SSL_KEYFILE: str
 
     JWT_SECRET: str
     ALGORITHM: str
     ACCESS_TOKEN_EXPIRE_MINUTES: int
 
     model_config = SettingsConfigDict(env_file=".env")
+
 
 settings = Settings()

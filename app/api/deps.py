@@ -11,7 +11,6 @@ from app.models.security.user import User
 from app.db.session import SessionLocal
 
 
-
 class TokenData(BaseModel):
     username: str | None = None
 

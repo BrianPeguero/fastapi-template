@@ -21,6 +21,7 @@ if config.config_file_name is not None:
 # target_metadata = None
 
 from app.models.base import Base
+
 target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
@@ -30,7 +31,10 @@ target_metadata = Base.metadata
 
 from app.core.config import settings
 
-config.set_main_option('sqlalchemy.url', f"{settings.PG_DRIVER}://{settings.PG_USER}:{settings.PG_PASSWORD}@{settings.PG_HOST}:{settings.PG_PORT}/{settings.PG_DB}")
+config.set_main_option(
+    "sqlalchemy.url",
+    f"{settings.PG_DRIVER}://{settings.PG_USER}:{settings.PG_PASSWORD}@{settings.PG_HOST}:{settings.PG_PORT}/{settings.PG_DB}",
+)
 
 
 def run_migrations_offline() -> None:
@@ -59,13 +63,11 @@ def run_migrations_offline() -> None:
 
 def run_migrations_online():
     engine = engine_from_config(
-                config.get_section(config.config_ini_section), prefix='sqlalchemy.')
+        config.get_section(config.config_ini_section), prefix="sqlalchemy."
+    )
 
     with engine.connect() as connection:
-        context.configure(
-                    connection=connection,
-                    target_metadata=target_metadata
-                    )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()

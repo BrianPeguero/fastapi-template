@@ -12,7 +12,7 @@ router = APIRouter()
 
 
 @router.get("/{user_id}", status_code=200, response_model=UserSchema)
-def get_user(*, user_id:int, db: Session = Depends(deps.get_db)) -> Any:
+def get_user(*, user_id: int, db: Session = Depends(deps.get_db)) -> Any:
     """
     Gets a single user by ID
     """

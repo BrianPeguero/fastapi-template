@@ -2,6 +2,10 @@
   "editor.defaultFormatter": "ms-python.black-formatter",
   "editor.tabSize": 4,
   "editor.formatOnSave": true,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true
+  },
   "cSpell.words": [
     "AUTOFLUSH",
     "fastapi",

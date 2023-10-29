@@ -5,6 +5,7 @@ from app.core.config import settings
 
 from app.models.base import Base
 
+
 class User(Base):
     __tablename__ = "user"
     __table_args__ = {"schema": settings.PG_SECURITY_SCHEMA}

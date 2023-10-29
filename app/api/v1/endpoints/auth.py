@@ -17,7 +17,8 @@ router = APIRouter()
 
 PWD_CONTEXT = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-@router.post('/signup', status_code=201, response_model=User)
+
+@router.post("/signup", status_code=201, response_model=User)
 def signup(*, user_in: UserCreate, db: Session = Depends(get_db)) -> Any:
     """
     Create new user without the need to be logged in.
@@ -30,14 +31,16 @@ def signup(*, user_in: UserCreate, db: Session = Depends(get_db)) -> Any:
             status_code=400,
             detail="The user with this email already exists in the system",
         )
-    
+
     user = user_crud.create(db=db, obj_in=user_in)
 
     return user
 
 
-@router.post('/login', status_code=200)
-def login(form_data: OAuth2PasswordRequestForm = Depends(), db:Session = Depends(get_db)) -> Any:
+@router.post("/login", status_code=200)
+def login(
+    form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)
+) -> Any:
     """
     Get the JWT for a user with data from OAuth2 request form body.
     """
@@ -45,15 +48,10 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db:Session = Depends
     user = authenticate(email=form_data.username, password=form_data.password, db=db)
 
     if not user:
-        raise HTTPException(
-            status_code=400,
-            detail=f"Incorrect username or password."
-        )
-    
-    return {
-        "access_token":create_access_token(sub=user.id),
-        "token_type": "bearer"
-    }
+        raise HTTPException(status_code=400, detail=f"Incorrect username or password.")
+
+    return {"access_token": create_access_token(sub=user.id), "token_type": "bearer"}
+
 
 @router.get("/me", response_model=User)
 def read_users_me(current_user: User = Depends(get_current_user)):
