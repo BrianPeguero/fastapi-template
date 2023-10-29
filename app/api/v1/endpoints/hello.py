@@ -1,9 +1,8 @@
 from fastapi import APIRouter
 from typing import Any
 
-import logging
+from app.utils.logging import logger
 
-logger = logging.getLogger()
 
 router = APIRouter()
 

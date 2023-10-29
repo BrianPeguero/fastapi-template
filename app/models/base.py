@@ -1,3 +1,8 @@
-from sqlalchemy.ext.declarative import declarative_base
+"""
+Declarative base of the sqlalchemy library
+"""
+
+
+from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()

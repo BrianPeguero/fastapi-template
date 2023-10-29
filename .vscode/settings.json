@@ -11,6 +11,8 @@
     "fastapi",
     "logfilename",
     "pydantic",
+    "sqlalchemy",
+    "starlette",
     "templating",
     "uvicorn"
   ]

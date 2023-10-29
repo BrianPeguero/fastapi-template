@@ -2,36 +2,23 @@
 """
 
 
-from pathlib import Path
+import time
+
 import os
-import logging
-import logging.config
 
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.templating import Jinja2Templates
+
+from starlette.responses import RedirectResponse
 
 from app.api.v1.api import api_router
 from app.core.config import settings
+from app.utils.logging import logger
 
 
 os.system("color")
-
-logger = logging.getLogger()
-BASE_PATH = Path(__file__).resolve().parent
-TEMPLATES = Jinja2Templates(directory=str(BASE_PATH / "templates"))
-
-LOG_FILE = "app/utils/app.log"
-# logging.config.fileConfig(
-#     "./app/utils/logging.ini",
-#     defaults={"logfilename": LOG_FILE},
-#     disable_existing_loggers=False,
-# )
-
-
-logger.setLevel(settings.API_DEBUG_LEVEL)
 
 
 @asynccontextmanager
@@ -54,6 +41,25 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title=settings.APP_TITLE, lifespan=lifespan)
 
 
+@app.middleware("http")
+async def add_process_time_header(request: Request, call_next):
+    """_summary_
+
+    Args:
+        request (Request): _description_
+        call_next (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+
+    start_time = time.time()
+    response = await call_next(request)
+    process_time = time.time() - start_time
+    response.headers["X-process-Time"] = str(process_time)
+    return response
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.API_CORS_ORIGINS,
@@ -66,11 +72,22 @@ app.add_middleware(
 app.include_router(api_router, prefix="/api/v1")
 
 
+@app.get("/")
+async def docs_redirect():
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
+
+    return RedirectResponse(url="/docs")
+
+
 if __name__ == "__main__":
     import uvicorn
 
     uvicorn.run(
-        app,
+        "main:app",
         host=settings.API_HOST,
         port=settings.API_PORT,
         workers=settings.API_WORKERS,
@@ -79,4 +96,6 @@ if __name__ == "__main__":
         log_level="info",
         log_config="./app/utils/logging.ini",
         use_colors=True,
+        reload=False,
+        timeout_graceful_shutdown=5,
     )
