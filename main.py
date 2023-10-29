@@ -1,7 +1,13 @@
+"""Entry point of the application
+"""
+
+
 from pathlib import Path
 import os
 import logging
 import logging.config
+
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -17,14 +23,35 @@ logger = logging.getLogger()
 BASE_PATH = Path(__file__).resolve().parent
 TEMPLATES = Jinja2Templates(directory=str(BASE_PATH / "templates"))
 
-log_file = "app/utils/app.log"
-# logging.config.fileConfig('./app/utils/logging.ini', defaults={'logfilename': log_file}, disable_existing_loggers=False)
+LOG_FILE = "app/utils/app.log"
+# logging.config.fileConfig(
+#     "./app/utils/logging.ini",
+#     defaults={"logfilename": LOG_FILE},
+#     disable_existing_loggers=False,
+# )
 
 
 logger.setLevel(settings.API_DEBUG_LEVEL)
 
 
-app = FastAPI(title=settings.APP_TITLE)
+@asynccontextmanager
+# pylint: disable-next=redefined-outer-name,unused-argument
+async def lifespan(app: FastAPI):
+    """The lifespan function defines code that needs to be executed before the
+    application starts up and also code that should be executed after shutdown
+
+    Args:
+        app (FastAPI): The application
+    """
+
+    # code to execute before start up
+    logger.debug("*** Start Up ***")
+    yield
+    # code to execute after the app shuts down
+    logger.debug("*** Shutdown ***")
+
+
+app = FastAPI(title=settings.APP_TITLE, lifespan=lifespan)
 
 
 app.add_middleware(
@@ -37,16 +64,6 @@ app.add_middleware(
 
 
 app.include_router(api_router, prefix="/api/v1")
-
-
-@app.on_event(event_type="startup")
-def startup():
-    logger.debug("### Start up ###")
-
-
-@app.on_event(event_type="shutdown")
-def shutdown():
-    logger.debug("### Shut down ###")
 
 
 if __name__ == "__main__":
