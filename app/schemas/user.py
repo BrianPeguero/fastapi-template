@@ -19,7 +19,7 @@ class UserBase(BaseModel):
     is_superuser: bool = False
 
 
-class userCreate(UserBase):
+class UserCreate(UserBase):
     """_summary_
 
     Args:
