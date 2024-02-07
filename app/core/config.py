@@ -27,7 +27,7 @@ class Settings(BaseSettings):
     API_PORT: int
     API_WORKERS: int
     API_DEBUG_MODE: bool
-    API_DEBUG_LEVEL: bool
+    API_DEBUG_LEVEL: str
 
     ACCESS_TOKEN_EXPIRE_MINUTES: int
     JWT_SECRET: str

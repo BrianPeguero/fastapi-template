@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.crud import notification_crud, user_crud
 from app.db.database import get_session
 from app.endpoints.v1.websockets.notifications import manager
-from app.schemas import notification_schemas
+from app.schemas import notification_schema
 
 router = APIRouter()
 
@@ -82,7 +82,7 @@ async def get_notification_by_user_id(
     )
 
 
-@router.post("", response_model=notification_schemas.Notification)
+@router.post("", response_model=notification_schema.Notification)
 async def create_notification(
     notif_in: notification_schema.NotificationCreate,
     db: AsyncSession = Depends(get_session),

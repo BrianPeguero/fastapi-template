@@ -3,7 +3,7 @@ from typing import List
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.models.security.notifition import Notification
+from app.models.security.notification import Notification
 from app.schemas import notification_schema
 
 
@@ -19,7 +19,7 @@ async def get_all_notifications(db: AsyncSession) -> List[Notification]:
 
     results = await db.execute(select(Notification))
 
-    return results.scalar().all()
+    return results.scalars().all()
 
 
 async def get_notification_by_id(notif_id: int, db: AsyncSession) -> List[Notification]:
