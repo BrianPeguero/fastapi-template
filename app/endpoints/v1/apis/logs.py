@@ -12,7 +12,7 @@ LOG_FILE_PATH = "app/utils/app.log"
 templates = Jinja2Templates(directory="app/templates")
 
 @router.get("")
-def get_logs(request: Request)
+def get_logs(request: Request):
     context = {
         "title": "FastAPI Streaming Log Viewer Over Webockets",
         "log_file": LOG_FILE_PATH

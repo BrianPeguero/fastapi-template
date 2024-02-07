@@ -6,9 +6,10 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from starlette.response import RedirectResponse
+from starlette.responses import RedirectResponse
 
 from app.core.config import settings
+from app.db.database import close_db, init_db
 from app.endpoints.v1.api import api_router_v1
 from app.endpoints.v1.ws import ws_router_v1
 from app.endpoints.v2.api import api_router_v2

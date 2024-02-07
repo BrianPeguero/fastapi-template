@@ -18,6 +18,6 @@ def hello_world():
     Returns:
         _type_: _description_
     """
-    logger.debug("Hello from v1")
+    logger.debug("Hello from v2")
 
-    return {"message": "Hello from v1"}
+    return {"message": "Hello from v2"}

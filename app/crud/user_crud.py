@@ -4,7 +4,7 @@
 from app.models.security.user import User
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from typiing import Any, Dict, Optional, Union
+from typing import Any, Dict, Optional, Union
 
 from app.core.security import get_password_hash
 from app.schemas.user import UserCreate, UserUpdate

@@ -1,4 +1,7 @@
-from datetime import datetime
+"""_summary_
+"""
+
+import datetime
 from typing import Optional
 
 from pydantic import BaseModel, ConfigDict
@@ -43,8 +46,8 @@ class NotificationInDBBase(NotificationBase):
     user_id_from: Optional[int] = None
     user_id_to: int
     message: str
-    created_at: Optional[datetime.time] = datetime.now()
-    read_at: Optional[datetime.time] = datetime.now()
+    created_at: Optional[datetime.time] = datetime.datetime.now()
+    read_at: Optional[datetime.time] = datetime.datetime.now()
     is_read: Optional[bool] = False
 
     model_config = ConfigDict(from_attributes=True)
