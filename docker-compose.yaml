@@ -1,0 +1,21 @@
+version: 3.8
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile:
+    ports:
+      - "80:80"
+  api:
+    build:
+      context: .
+      dockerfile:
+    depends_on:
+      - nginx
+  redis:
+    image:
+  worker:
+    build:
+      context: .
+      dockerfile:
