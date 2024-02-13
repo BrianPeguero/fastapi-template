@@ -12,4 +12,4 @@ COPY . /home/app/
 
 EXPOSE 8080
 
-CMD ["gunicorn"]
+CMD ["gunicorn", "--log-config", "app/utils/logging.ini", "--workers", "1", "--worker-class", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8080", "main:app"]
