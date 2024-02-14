@@ -1,21 +1,46 @@
 version: 3.8
 
 services:
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    build:
+      context: .
+      dockerfile: deployments/dockerfiles/api.dockerfile
+  api:
+    container_name: api
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+  celery:
+    container_name: celery
+    build:
+      context: .
+      dockerfile:
+    depends_on:
+      - redis
+      - api
+  flower:
+    build:
+      context: .
+      dockerfile:
+    ports:
+      - "5555:5555"
+    depends_on:
+      - api
+      - redis
+      - celery
   nginx:
     build:
       context: .
       dockerfile:
     ports:
       - "80:80"
-  api:
-    build:
-      context: .
-      dockerfile:
     depends_on:
-      - nginx
-  redis:
-    image:
-  worker:
-    build:
-      context: .
-      dockerfile:
+      - api
+      - redis
+      - celery
+      - flower
