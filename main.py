@@ -9,7 +9,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import RedirectResponse
 
 from app.core.config import settings
-from app.db.database import close_db, init_db
 from app.endpoints.v1.api import api_router_v1
 from app.endpoints.v1.ws import ws_router_v1
 from app.endpoints.v2.api import api_router_v2
@@ -24,9 +23,9 @@ async def lifespan(app: FastAPI):
         app (FastAPI): _description_
     """
     logger.debug("*** Start Up ***")
-    await init_db()
+    # await init_db()
     yield
-    await close_db()
+    # await close_db()
 
 
 app = FastAPI(title=settings.PROJECT_NAME, lifespan=lifespan)
