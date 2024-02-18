@@ -1,4 +1,4 @@
-FROM python3.12
+FROM python:3.12
 
 RUN pip install --upgrade pip
 
@@ -10,4 +10,6 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 COPY . /home/app/
 
-CMD ["celery", "-A", "celery_worker", "flower", "--port=5555"]
+EXPOSE 5555
+
+CMD ["celery", "-A", "app.utils.celery", "flower", "port=5555", "url_prefix=flower"]
